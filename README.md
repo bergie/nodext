@@ -61,6 +61,8 @@ For example:
 
     exports.extension = MyExtension
 
+### Configuring and running extensions
+
 Such extension, stored in `extension/my/main.coffee` could be enabled by:
 
     {
@@ -85,3 +87,20 @@ Now, run this with NodeXT:
     $ nodext my_config_file.json
 
 ...and the extension's route should answer in <http://127.0.0.1/foo/hello/World>. Use _user_ / _pass_ to log in.
+
+## Using NodeXT with SSL
+
+NodeXT can be configured to run with HTTPS quite easily. You'll need the necessary certificate files. To generate simple ones for local testing, run:
+
+    $ openssl genrsa -out privatekey.pem 1024 
+    $ openssl req -new -key privatekey.pem -out certrequest.csr 
+    $ openssl x509 -req -in certrequest.csr -signkey privatekey.pem -out certificate.pem
+
+And then just configure your NodeXT server to use them:
+
+      "server": {
+        "hostname": "127.0.0.1",
+        "port": 443,
+        "privateKey": "privatekey.pem",
+        "certificate": "certificate.pem"
+      },

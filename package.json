@@ -1,9 +1,9 @@
 {
   "name": "nodext",
   "description":  "Plugin-driven Node.js applications",
-  "keywords":     ["server", "express", "extension"],
+  "keywords":     ["server", "express", "extension", "framework"],
   "author":       "Henri Bergius",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "licenses": [{
     "type": "MIT",
     "url": "https://github.com/bergie/nodext/raw/master/LICENSE"

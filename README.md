@@ -199,4 +199,12 @@ Running this command with the other JugglingDB adapters doesn't have any effect.
 
 For debugging purposes it is nice to see the database queries executed by JugglingDB. To enable query logging in NodeXT, add the following to the `database` section of your configuration:
 
-      "logQueries": false
+      "logQueries": true
+
+Depending on your database provider, you should see output like:
+
+    SELECT * FROM Post WHERE 1331650495746 
+
+...or:
+
+    KEYS Post:* 1331650628592

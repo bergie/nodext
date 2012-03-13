@@ -104,3 +104,99 @@ And then just configure your NodeXT server to use them:
         "privateKey": "privatekey.pem",
         "certificate": "certificate.pem"
       },
+
+## Optional ORM integration
+
+NodeXT has optional integration with the [JugglingDB](https://github.com/1602/jugglingdb#readme) ORM. This allows very easy creation of database-backed Node.js applications.
+
+JugglingDB can persist content in multiple storage back-ends including MySQL, MongoDB and Redis. The JugglingDB connection can be set up in your NodeXT configuration file. Here is an example of using a local Redis service:
+
+    "database": {
+      "provider": "redis",
+      "configuration": {}
+    },
+
+And this is how a MySQL connection could be configured:
+
+    "database": {
+      "provider": "mysql",
+      "configuration": {
+        "username": "someuser",
+        "password": "somepassword",
+        "database": "dbname"
+      }
+    },
+
+### Registering models
+
+Any extension can register JugglingDB models in the `getModels` method. For example:
+
+    class MyExtension extends nodext.Extension
+      name: "MyExtension"
+      config: {}
+      models: {}
+      schema: {}
+
+      getModels: (@schema, otherModels) ->
+        {Schema} = require 'jugglingdb'
+        @models.Post = schema.define 'Post',
+          title:
+            type: String
+            length: 255
+            index: true
+          content:
+            type: Schema.Text
+          published_at:
+            type: Date
+        @models
+
+This way the extension itself keeps track of the models it registers, so they can later be used in routes, but at the same time they are registered with NodeXT so that it can centrally handle configuration and storage creation.
+
+### Using models and views
+
+Now the routes will have full JugglingDB access. For example:
+
+      registerRoutes: (server) ->
+        # The root route of this component serves a list of
+        # posts
+        server.get "#{@config.urlPrefix}", (req, res) ->
+
+          # Use the extension's views directory
+          server.set 'views', "#{__dirname}/views"
+
+          # Fetch all Post entries and display them
+          @models.Post.all (err, posts) ->
+            res.render "posts",
+              locals:
+                items: posts
+                as: 'post'
+
+#### Semi-automatic CRUD with Resource-Juggling
+
+[Resource-Juggling](http://search.npmjs.org/#/resource-juggling) is a useful library for generating CRUD routes for JugglingDB models and can also be used with NodeXT. Example:
+
+      registerRoutes: (server) ->    
+        resource = require 'express-resource'
+        resourceJuggling = require 'resource-juggling'
+
+        posts = server.resource resourceJuggling.getResource
+          schema: @schema
+          name: 'Post'
+          model: @models.Post
+          base: @config.urlPrefix
+
+This would create all the necessary routes for Create, Read, Update, and Delete for the model. See [Resource-Juggling documentation](https://github.com/bergie/resource-juggling#readme) for more information.
+
+### Creating storage
+
+With MySQL you need to create the storage tables before using them. With NodeXT you can use the `nodext_storage_create` command (**note** this will drop any existing data in the JugglingDB database):
+
+    $ nodext_storage_create my_config_file.json
+
+Running this command with the other JugglingDB adapters doesn't have any effect.
+
+### Query logging
+
+For debugging purposes it is nice to see the database queries executed by JugglingDB. To enable query logging in NodeXT, add the following to the `database` section of your configuration:
+
+      "logQueries": false

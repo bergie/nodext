@@ -1,6 +1,7 @@
 {Schema} = require 'jugglingdb'
 
 exports.getSchema = (config) ->
+  return null unless config.database
   schema = new Schema config.database.provider, config.database.configuration
 
   unless config.database.logQueries is undefined

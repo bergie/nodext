@@ -19,7 +19,8 @@
   },
   "main": "./lib/nodext",
   "bin": {
-    "nodext":        "./bin/nodext"
+    "nodext": "./bin/nodext",
+    "nodext_storage_create": "./bin/nodext_storage_create"
   },
   "repository": {
     "type": "git",

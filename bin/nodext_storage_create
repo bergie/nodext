@@ -2,6 +2,10 @@
 cfg = require("#{__dirname}/../lib/configuration").getConfig()
 
 schema = require("#{__dirname}/../lib/database").getSchema cfg
+unless schema
+  console.log "No datatabase schema configured, aborting"
+  process.exit()
+
 models = require("#{__dirname}/../lib/models").getModels schema, cfg
 
 console.log "Automigrating the database schema..."

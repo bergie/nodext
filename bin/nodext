@@ -1,0 +1,7 @@
+#!/usr/bin/env coffee
+cfg = require("#{__dirname}/../lib/configuration").getConfig()
+
+server = require "#{__dirname}/../lib/server"
+app = server.createApplication cfg
+app.listen cfg.server.port, ->
+  console.log "NodeXT listening in #{cfg.server.hostname} port #{cfg.server.port}"

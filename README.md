@@ -19,7 +19,7 @@ The  extension might look like the following (in CoffeeScript):
     nodext = require 'nodext'
 
     class MyExtension extends nodext.Extension
-      name: "MyExtension":
+      name: "MyExtension"
       config: {}
 
     exports.extension = MyExtension
@@ -34,21 +34,24 @@ The extension configuration contains a key `urlPrefix` that tells the URL prefix
 
 For example:
 
+    nodext = require "#{__dirname}/../../../../lib/nodext"
+    express = require 'express'
+
     class MyExtension extends nodext.Extension
-      name: "MyExtension":
+      name: "MyExtension"
       config: {}
 
       configure: (server) ->
         # Function to check authentication against the username
         # and password provided in extension configuration
-        checkAuth = (username, password) ->
+        checkAuth = (username, password) =>
           if username is @config.username and password is @config.password
             return true
-          false
+            false
 
         # Use HTTP Basic authentication under the URL space handled
         # by this extension
-        server.use @config.urlPrefix, express.BasicAuth checkAuth
+        server.use @config.urlPrefix, express.basicAuth checkAuth
 
       registerRoutes: (server) ->
         # Register a route under the URL space handled by this
@@ -56,19 +59,22 @@ For example:
         server.get "#{@config.urlPrefix}hello/:user", (req, res) ->
           res.send "Hello #{req.params.user}"
 
+    exports.extension = MyExtension
+
 Such extension, stored in `extension/my/main.coffee` could be enabled by:
 
     {
-      "server: {
+      "server": {
         "hostname": "127.0.0.1",
         "port": 8001
       },
-      "extensions: {
+      "extensions": {
         "/foo/": {
-          "name": "my"
+          "name": "my",
+          "location": "./extension/my",
           "configuration": {
             "username": "user",
-            "password: "pass"
+            "password": "pass"
           }
         }
       }

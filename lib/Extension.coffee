@@ -1,4 +1,5 @@
 {_} = require 'underscore'
+path = require 'path'
 
 class Extension
   name: ""
@@ -30,6 +31,10 @@ exports.loadExtensions = (config) ->
   for prefix, extension of config.extensions
     extension.configuration ?= {}
     extension.configuration.urlPrefix = prefix
-    ext = require "../extension/#{extension.name}/main"
+
+    extension.location ?= "../extension/#{extension.name}"
+    extension.location = path.resolve config.projectRoot, extension.location
+
+    ext = require "#{extension.location}/main"
     loaded[extension.name] = new ext.extension extension.configuration
   loaded

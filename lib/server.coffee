@@ -1,4 +1,5 @@
 http = require 'express'
+path = require 'path'
 
 exports.createApplication = (config) ->
   extensions = require('./Extension').loadExtensions config
@@ -6,11 +7,13 @@ exports.createApplication = (config) ->
   schema = require('./database').getSchema config
   models = require('./models').getModels schema, config
 
-  if config.server.privateKey
+  if config.server.privateKey and config.server.certificate
+    config.server.privateKey = path.resolve config.projectRoot, config.server.privateKey
+    config.server.certificate = path.resolve config.projectRoot, config.server.certificate
     fs = require 'fs'
     serverOptions =
-      key: fs.readFileSync "#{__dirname}/#{config.server.privateKey}"
-      cert: fs.readFileSync "#{__dirname}/#{config.server.certificate}"
+      key: fs.readFileSync config.server.privateKey
+      cert: fs.readFileSync config.server.certificate
     server = http.createServer serverOptions
   else
     server = http.createServer()
@@ -24,7 +27,9 @@ exports.createApplication = (config) ->
     for name, extension of extensions
       extension.configure server, models
 
-    server.set 'view engine', config.server.viewEngine
+    if config.server.view
+      config.server.view.engine ?= 'jade'
+      server.set 'view engine', config.server.view.engine
 
   for name, extension of extensions
     extension.registerRoutes server

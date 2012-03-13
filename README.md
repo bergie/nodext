@@ -88,6 +88,22 @@ Now, run this with NodeXT:
 
 ...and the extension's route should answer in <http://127.0.0.1/foo/hello/World>. Use _user_ / _pass_ to log in.
 
+#### Extensions from NPM packages
+
+[NPM](http://npmjs.org/) packages may also contain extensions. For example, to use the [nodext-create](https://github.com/bergie/nodext-create) extension, install it with:
+
+    $ npm install nodext-create
+
+And then enable in your configuration with:
+
+    "/create/": {
+      "name": "create",
+      "location": "./node_modules/nodext-create",
+      "configuration": {}
+    }
+
+If NodeXT takes off, this might be a great way to ship reusable website components like user management, news listings, and others for Node.js web applications.
+
 ## Using NodeXT with SSL
 
 NodeXT can be configured to run with HTTPS quite easily. You'll need the necessary certificate files. To generate simple ones for local testing, run:

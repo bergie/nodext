@@ -34,7 +34,7 @@ The extension configuration contains a key `urlPrefix` that tells the URL prefix
 
 For example:
 
-    nodext = require "#{__dirname}/../../../../lib/nodext"
+    nodext = require 'nodext'
     express = require 'express'
 
     class MyExtension extends nodext.Extension

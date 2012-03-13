@@ -1,0 +1,10 @@
+#!/usr/bin/env coffee
+cfg = require("#{__dirname}/../lib/configuration").getConfig()
+
+schema = require("#{__dirname}/../lib/database").getSchema cfg
+models = require("#{__dirname}/../lib/models").getModels schema, cfg
+
+console.log "Automigrating the database schema..."
+schema.automigrate ->
+  console.log "Done"
+  process.exit()

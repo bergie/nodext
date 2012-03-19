@@ -18,3 +18,10 @@ extension = require "#{__dirname}/Extension"
 
 exports.Extension = extension.Extension
 exports.loadExtensions = extension.loadExtensions
+
+config = require "#{__dirname}/configuration"
+exports.getConfig = config.getConfig
+
+database = require "#{__dirname}/database"
+exports.getSchema = database.getSchema
+exports.getModels = database.getModels

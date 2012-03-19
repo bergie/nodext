@@ -25,6 +25,14 @@
     </div>
     <div id="main">
       
+      <div id="module_docstring">
+        <h1>NodeXT web server</h1>
+
+<p>This module sets up the <a href="http://expressjs.com/">Express</a> server
+used by NodeXT and registers the middleware and routes from all
+enabled extensions for it.</p>
+      </div>
+      
       
       
       <div id="functions">
@@ -33,6 +41,30 @@
         <div class="function">
           <div class="header">
             <a id="exports.createApplication"><h3>exports.createApplication(config)</h3></a>
+          </div>
+          
+          <div>
+            <p>Instantiate an Express server based on the configuration.</p>
+
+<p>To enable SSL, provide something like the following configuration:</p>
+
+<pre><code>"server": {
+  "hostname": "127.0.0.1",
+  "port": 443,
+  "privateKey": "privatekey.pem",
+  "certificate": "certificate.pem"
+},
+</code></pre>
+
+<p>Express view engines can be configured with:</p>
+
+<pre><code>"server": {
+  ...
+  "view": {
+    "engine": "jade"
+  }
+}
+</code></pre>
           </div>
           
         </div>

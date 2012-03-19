@@ -29,6 +29,13 @@
     </div>
     <div id="main">
       
+      <div id="module_docstring">
+        <h1>NodeXT configuration handling</h1>
+
+<p>This module provides configuration loading functionality for NodeXT
+applications.</p>
+      </div>
+      
       
       
       <div id="functions">
@@ -39,6 +46,15 @@
             <a id="exports.getConfigFile"><h3>exports.getConfigFile()</h3></a>
           </div>
           
+          <div>
+            <p>Get the name of configuration file used for the NodeXT application.</p>
+
+<p>By default returns the last argument NodeXT was started with,
+so when it is run with <code>nodext somefile.json</code>, will return
+<code>somefile.json</code>. If no argument was provided, it will default to
+<code>configuration.json</code>.</p>
+          </div>
+          
         </div>
         
         <div class="function">
@@ -46,11 +62,19 @@
             <a id="exports.getProjectRoot"><h3>exports.getProjectRoot(configFile)</h3></a>
           </div>
           
+          <div>
+            <p>Determine the root directory path of the NodeXT application.</p>
+          </div>
+          
         </div>
         
         <div class="function">
           <div class="header">
             <a id="exports.getConfig"><h3>exports.getConfig(configFile)</h3></a>
+          </div>
+          
+          <div>
+            <p>Get the parsed configuration object.</p>
           </div>
           
         </div>

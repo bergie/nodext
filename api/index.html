@@ -21,8 +21,6 @@
         
         <li><a href="lib/database.html">lib/database.coffee</a></li>
         
-        <li><a href="lib/models.html">lib/models.coffee</a></li>
-        
         <li><a href="lib/nodext.html">lib/nodext.coffee</a></li>
         
         <li><a href="lib/server.html">lib/server.coffee</a></li>
@@ -70,7 +68,10 @@ in NodeXT:</p>
           <a href="lib/configuration.html"><h3>configuration.coffee</h3></a>
         </div>
         <div class="module_content">
-          
+          <h1>NodeXT configuration handling</h1>
+
+<p>This module provides configuration loading functionality for NodeXT
+applications.</p>
           
           
           <h4>Functions</h4>
@@ -92,7 +93,10 @@ in NodeXT:</p>
           <a href="lib/database.html"><h3>database.coffee</h3></a>
         </div>
         <div class="module_content">
-          
+          <h1>NodeXT database handling</h1>
+
+<p>This is an optional module of NodeXT that sets up a <a href="https://github.com/1602/jugglingdb">JugglingDB</a>
+database connection based on the given configuration.</p>
           
           
           <h4>Functions</h4>
@@ -100,23 +104,7 @@ in NodeXT:</p>
             
             <li><a href="lib/database.html#exports.getSchema">exports.getSchema(config)</a></li>
             
-          </ul>
-          
-        </div>
-      </div>
-      
-      <div class="module">
-        <div class="header">
-          <a href="lib/models.html"><h3>models.coffee</h3></a>
-        </div>
-        <div class="module_content">
-          
-          
-          
-          <h4>Functions</h4>
-          <ul class="functionlist">
-            
-            <li><a href="lib/models.html#exports.getModels">exports.getModels(schema, config)</a></li>
+            <li><a href="lib/database.html#exports.getModels">exports.getModels(schema, config)</a></li>
             
           </ul>
           
@@ -128,7 +116,23 @@ in NodeXT:</p>
           <a href="lib/nodext.html"><h3>nodext.coffee</h3></a>
         </div>
         <div class="module_content">
-          
+          <h1>NodeXT library entrypoint</h1>
+
+<p>This is the main way for extensions and other applications to
+access NodeXT functionality:</p>
+
+<pre><code>nodext = require 'nodext'
+</code></pre>
+
+<p>To load all enabled extensions:</p>
+
+<pre><code>extensions = nodext.loadExtensions()
+</code></pre>
+
+<p>To extend the Extension baseclass:</p>
+
+<pre><code>class MyExtension extends nodext.Extension
+</code></pre>
           
           
         </div>
@@ -139,7 +143,11 @@ in NodeXT:</p>
           <a href="lib/server.html"><h3>server.coffee</h3></a>
         </div>
         <div class="module_content">
-          
+          <h1>NodeXT web server</h1>
+
+<p>This module sets up the <a href="http://expressjs.com/">Express</a> server
+used by NodeXT and registers the middleware and routes from all
+enabled extensions for it.</p>
           
           
           <h4>Functions</h4>

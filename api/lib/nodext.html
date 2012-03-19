@@ -18,6 +18,26 @@
     </div>
     <div id="main">
       
+      <div id="module_docstring">
+        <h1>NodeXT library entrypoint</h1>
+
+<p>This is the main way for extensions and other applications to
+access NodeXT functionality:</p>
+
+<pre><code>nodext = require 'nodext'
+</code></pre>
+
+<p>To load all enabled extensions:</p>
+
+<pre><code>extensions = nodext.loadExtensions()
+</code></pre>
+
+<p>To extend the Extension baseclass:</p>
+
+<pre><code>class MyExtension extends nodext.Extension
+</code></pre>
+      </div>
+      
       
       
     </div>

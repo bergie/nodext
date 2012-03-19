@@ -20,10 +20,19 @@
         
         <li><a href="#exports.getSchema">exports.getSchema</a></li>
         
+        <li><a href="#exports.getModels">exports.getModels</a></li>
+        
       </ul>
       
     </div>
     <div id="main">
+      
+      <div id="module_docstring">
+        <h1>NodeXT database handling</h1>
+
+<p>This is an optional module of NodeXT that sets up a <a href="https://github.com/1602/jugglingdb">JugglingDB</a>
+database connection based on the given configuration.</p>
+      </div>
       
       
       
@@ -33,6 +42,44 @@
         <div class="function">
           <div class="header">
             <a id="exports.getSchema"><h3>exports.getSchema(config)</h3></a>
+          </div>
+          
+          <div>
+            <p>Returns a JugglingDB schema instance according to NodeXT
+configuration, or <code>null</code> if there is no database configured.</p>
+
+<p>Here is an example of using a local Redis service:</p>
+
+<pre><code>"database": {
+  "provider": "redis",
+  "configuration": {}
+},
+</code></pre>
+
+<p>And this is how a MySQL connection could be configured:</p>
+
+<pre><code>"database": {
+  "provider": "mysql",
+  "configuration": {
+    "username": "someuser",
+    "password": "somepassword",
+    "database": "dbname"
+  }
+},
+</code></pre>
+          </div>
+          
+        </div>
+        
+        <div class="function">
+          <div class="header">
+            <a id="exports.getModels"><h3>exports.getModels(schema, config)</h3></a>
+          </div>
+          
+          <div>
+            <p>Returns JugglingDB models registered by various extensions.</p>
+
+<p>This runs the <code>getModels</code> method of each enabled extension.</p>
           </div>
           
         </div>

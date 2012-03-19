@@ -1,12 +1,13 @@
 #!/usr/bin/env coffee
 cfg = require("#{__dirname}/../lib/configuration").getConfig()
+db = require "#{__dirname}/../lib/database"
 
-schema = require("#{__dirname}/../lib/database").getSchema cfg
+schema = db.getSchema cfg
 unless schema
   console.log "No datatabase schema configured, aborting"
   process.exit()
 
-models = require("#{__dirname}/../lib/models").getModels schema, cfg
+models = db.getModels schema, cfg
 
 console.log "Automigrating the database schema..."
 schema.automigrate ->

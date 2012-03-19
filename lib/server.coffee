@@ -4,8 +4,9 @@ path = require 'path'
 exports.createApplication = (config) ->
   extensions = require('./Extension').loadExtensions config
 
-  schema = require('./database').getSchema config
-  models = require('./models').getModels schema, config
+  database = require './database'
+  schema = database.getSchema config
+  models = database.getModels schema, config
 
   if config.server.privateKey and config.server.certificate
     config.server.privateKey = path.resolve config.projectRoot, config.server.privateKey

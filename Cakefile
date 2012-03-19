@@ -15,7 +15,7 @@ task 'docpub', 'publish API documentation', ->
     (sh "./node_modules/coffeedoc/bin/coffeedoc -o api lib")
     (sh "mv api api_tmp")
     (sh "git checkout gh-pages")
-    (sh "mv api_tmp api")
+    (sh "cp -R api_tmp/* api/")
     (sh "git add api/*")
     (sh "git commit -m 'API docs update'")
     (sh "git checkout master")

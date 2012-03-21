@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "coffeedoc": ">=0.1.13",
-    "async": ">=0.1.18"
+    "async": ">=0.1.18",
+    "docco-husky": ">=0.3.2"
   },
   "main": "./lib/nodext",
   "bin": {
@@ -29,5 +30,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/bergie/nodext.git"
+  },
+  "docco_husky": {
+    "output_dir": "docs",
+    "project_name": "NodeXT"
   }
 }

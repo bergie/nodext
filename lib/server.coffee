@@ -29,6 +29,8 @@ exports.createApplication = (config) ->
           "engine": "jade"
         }
       }
+
+  View engine layouts can be configured using the `layout` key.
   ###
   extensions = require('./Extension').loadExtensions config
 
@@ -53,7 +55,11 @@ exports.createApplication = (config) ->
 
     if config.server.view
       config.server.view.engine ?= 'jade'
+      config.server.view.options ?= {}
+      config.server.view.options.root ?= config.projectRoot
       server.set 'view engine', config.server.view.engine
+      server.set 'view options', config.server.view.options
+      server.set 'views', config.server.view.options.root
 
   for name, extension of extensions
     extension.registerRoutes server

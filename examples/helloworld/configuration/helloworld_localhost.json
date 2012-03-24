@@ -1,7 +1,12 @@
 {
   "server": {
     "hostname": "127.0.0.1",
-    "port": 8001
+    "port": 8001,
+    "view": {
+      "options": {
+        "layout": "views/helloworld"
+       }
+    }
   },
   "extensions": {
     "/foo/": {

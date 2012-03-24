@@ -21,6 +21,7 @@ class MyExtension extends nodext.Extension
     # Register a route under the URL space handled by this
     # extension
     server.get "#{@config.urlPrefix}hello/:user", (req, res) ->
-      res.send "Hello #{req.params.user}"
+      res.render "#{__dirname}/views/hello",
+        message: "Hello #{req.params.user}"
 
 exports.extension = MyExtension

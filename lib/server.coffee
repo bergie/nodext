@@ -48,11 +48,6 @@ exports.createApplication = (config) ->
     server = http.createServer()
 
   server.configure ->
-    server.use http.logger()
-
-    server.use http.bodyParser()
-    server.use http.cookieParser()
-
     for name, extension of extensions
       extension.configure server, models
 

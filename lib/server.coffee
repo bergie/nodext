@@ -56,7 +56,8 @@ exports.createApplication = (config) ->
     if config.server.view
       config.server.view.engine ?= 'jade'
       config.server.view.options ?= {}
-      config.server.view.options.root ?= config.projectRoot
+      config.server.view.options.root ?= './views'
+      config.server.view.options.root = path.resolve config.projectRoot, config.server.view.options.root
       server.set 'view engine', config.server.view.engine
       server.set 'view options', config.server.view.options
       server.set 'views', config.server.view.options.root

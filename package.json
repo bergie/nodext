@@ -3,7 +3,7 @@
   "description":  "Plugin-driven Node.js applications",
   "keywords":     ["server", "express", "extension", "framework"],
   "author":       "Henri Bergius",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "licenses": [{
     "type": "MIT",
     "url": "https://github.com/bergie/nodext/raw/master/LICENSE"

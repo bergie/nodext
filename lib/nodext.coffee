@@ -25,3 +25,5 @@ exports.getConfig = config.getConfig
 database = require "#{__dirname}/database"
 exports.getSchema = database.getSchema
 exports.getModels = database.getModels
+
+exports.server = require "#{__dirname}/server"

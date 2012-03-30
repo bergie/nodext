@@ -21,6 +21,7 @@ exports.loadExtensions = extension.loadExtensions
 
 config = require "#{__dirname}/configuration"
 exports.getConfig = config.getConfig
+exports.getConfigFile = config.getConfigFile
 
 database = require "#{__dirname}/database"
 exports.getSchema = database.getSchema

@@ -17,18 +17,14 @@ exports.getConfigFile = ->
   `configuration.json`.
   ###
   if process.argv.length > 2
-    return process.argv[2]
-
-  "configuration.json"
+    return path.resolve process.cwd(), process.argv[2]
+  path.resolve process.cwd(), "configuration.json"
 
 exports.getProjectRoot = (configFile) ->
   ###
   Determine the root directory path of the NodeXT application.
   ###
   configFile = exports.getConfigFile() unless configFile
-
-  # Convert to absolute path
-  configFile = path.resolve process.cwd(), configFile
 
   # Remove filename, and optionally 'configuration' subdir
   configFileParts = configFile.split '/'
@@ -44,7 +40,7 @@ exports.getConfig = (configFile) ->
   ###
   configFile = exports.getConfigFile() unless configFile
 
-  cfg = JSON.parse fs.readFileSync "#{process.cwd()}/#{configFile}"
+  cfg = JSON.parse fs.readFileSync configFile
 
   cfg.projectRoot ?= exports.getProjectRoot configFile
 

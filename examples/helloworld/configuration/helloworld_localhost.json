@@ -4,7 +4,8 @@
     "port": 8001,
     "view": {
       "options": {
-        "layout": "views/helloworld"
+        "layout": "helloworld",
+        "root": "./views"
        }
     }
   },

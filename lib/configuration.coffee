@@ -42,6 +42,10 @@ exports.getConfig = (configFile) ->
 
   cfg = JSON.parse fs.readFileSync configFile
 
+  # Set project root to configuration
   cfg.projectRoot ?= exports.getProjectRoot configFile
+
+  # Heroku support, get server port from environment
+  cfg.server?.port = process.env.PORT if process.env.PORT
 
   cfg

@@ -88,6 +88,22 @@ Now, run this with NodeXT:
 
 ...and the extension's route should answer in <http://127.0.0.1/foo/hello/World>. Use _user_ / _pass_ to log in.
 
+#### Running on Heroku
+
+NodeXT has tentative Heroku support. With it, the `server.port` parameter of your NodeXT configuration will be overridden with `process.env.PORT`, if defined.
+
+You'll also want to define a `Procfile` with something like:
+
+    web: ./node_modules/nodext/bin/nodext my_config_file.json
+
+If you have the [Heroku toolbelt](https://toolbelt.heroku.com/) installed, you can try this with:
+
+    $ foreman start -f examples/helloworld/Procfile
+
+and then making a request to <http://localhost:5000/foo/hello/World>.
+
+See [getting started with Node.js on Heroku](https://devcenter.heroku.com/articles/nodejs) for more information.
+
 #### Extensions from NPM packages
 
 [NPM](http://npmjs.org/) packages may also contain extensions. For example, to use the [nodext-create](https://github.com/bergie/nodext-create) extension, install it with:

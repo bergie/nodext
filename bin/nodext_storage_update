@@ -9,9 +9,7 @@ unless schema
 
 models = db.getModels schema, cfg
 
-console.warn "This will delete existing data on SQL databases"
-
-console.log "Automigrating the database schema..."
-schema.automigrate ->
+console.log "Autoupdating the database schema..."
+schema.autoupdate ->
   console.log "Done"
   process.exit()

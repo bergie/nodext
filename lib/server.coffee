@@ -63,6 +63,10 @@ exports.createApplication = (config) ->
       server.set 'views', config.server.view.options.root
 
   for name, extension of extensions
-    extension.registerRoutes server
+    if extension.isReady()
+      extension.registerRoutes server
+      continue
+    extension.once 'ready', ->
+      extension.registerRoutes server
 
   server

@@ -9,8 +9,9 @@ in NodeXT:
 ###
 {_} = require 'underscore'
 path = require 'path'
+events = require 'events'
 
-class Extension
+class Extension extends events.EventEmitter
   ###
   ## NodeXT extension baseclass
 
@@ -66,6 +67,8 @@ class Extension
     ### 
     Register routes to Express server under given prefix
     ###
+
+  isReady: -> true
 
 exports.Extension = Extension
 

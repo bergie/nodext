@@ -6,6 +6,7 @@ used by NodeXT and registers the middleware and routes from all
 enabled extensions for it.
 ###
 http = require 'express'
+require 'express-configure'
 path = require 'path'
 
 exports.createApplication = (config) ->
@@ -49,9 +50,15 @@ exports.createApplication = (config) ->
   else
     server = http.createServer()
 
-  server.configure ->
+  server.configure (done) ->
+    pending = 0
     for name, extension of extensions
       extension.configure server, models
+      unless extension.isReady()
+        pending++
+        extension.once 'ready', ->
+          pending--
+          do done unless pending
 
     if config.server.view
       config.server.view.engine ?= 'jade'
@@ -62,11 +69,19 @@ exports.createApplication = (config) ->
       server.set 'view options', config.server.view.options
       server.set 'views', config.server.view.options.root
 
+    do done unless pending
+
+  registerRoutes = ->
+    for name, extension of extensions
+      extension.registerRoutes server
+
+  pendingRoute = 0
   for name, extension of extensions
-    if extension.isReady()
-      extension.registerRoutes server
-      continue
-    extension.once 'ready', ->
-      extension.registerRoutes server
+    unless extension.isReady()
+      pendingRoute++
+      extension.once 'ready', ->
+        pendingRoute--
+        do registerRoutes unless pendingRoute
+  do registerRoutes unless pendingRoute
 
   server

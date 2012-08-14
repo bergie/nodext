@@ -94,6 +94,7 @@ exports.loadExtensions = (config) ->
   will be set as the `urlPrefix` key of the extension configuration.
   ###
   config ?= {}
+  config.extensionDefaults ?= {}
   config.extensions ?= []
 
   return loaded unless _.isEmpty loaded
@@ -106,5 +107,5 @@ exports.loadExtensions = (config) ->
     extension.location = path.resolve config.projectRoot, extension.location
 
     ext = require "#{extension.location}/main"
-    loaded[extension.name] = new ext.extension extension.configuration
+    loaded[extension.name] = new ext.extension _.defaults extension.configuration, config.extensionDefaults
   loaded

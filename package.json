@@ -21,7 +21,8 @@
   "devDependencies": {
     "coffeedoc": ">=0.1.13",
     "async": ">=0.1.18",
-    "docco-husky": ">=0.3.2"
+    "docco-husky": ">=0.3.2",
+    "coffeelint": "*"
   },
   "main": "./lib/nodext",
   "bin": {

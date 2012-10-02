@@ -40,8 +40,10 @@ exports.createApplication = (config) ->
   models = database.getModels schema, config
 
   if config.server.privateKey and config.server.certificate
-    config.server.privateKey = path.resolve config.projectRoot, config.server.privateKey
-    config.server.certificate = path.resolve config.projectRoot, config.server.certificate
+    key = path.resolve config.projectRoot, config.server.privateKey
+    cert = path.resolve config.projectRoot, config.server.certificate
+    config.server.privateKey = key
+    config.server.certificate = cert
     fs = require 'fs'
     serverOptions =
       key: fs.readFileSync config.server.privateKey
@@ -59,12 +61,12 @@ exports.createApplication = (config) ->
         extension.once 'ready', ->
           pending--
           do done unless pending
-
+    root = path.resolve config.projectRoot, config.server.view.options.root
     if config.server.view
       config.server.view.engine ?= 'jade'
       config.server.view.options ?= {}
       config.server.view.options.root ?= './views'
-      config.server.view.options.root = path.resolve config.projectRoot, config.server.view.options.root
+      config.server.view.options.root = root
       server.set 'view engine', config.server.view.engine
       server.set 'view options', config.server.view.options
       server.set 'views', config.server.view.options.root

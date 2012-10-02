@@ -33,7 +33,7 @@ class Extension extends events.EventEmitter
   version: "0.0.1"
   config: {}
 
-  # 
+  #
   constructor: (config) ->
     ###
     Set up the extension with a given configuration.
@@ -54,7 +54,7 @@ class Extension extends events.EventEmitter
     ###
 
   # Get JugglingDB models for Schema
-  getModels: (schema) -> 
+  getModels: (schema) ->
     ###
     Get the JugglingDB models for a given schema.
 
@@ -64,7 +64,7 @@ class Extension extends events.EventEmitter
     {}
 
   registerRoutes: (server) ->
-    ### 
+    ###
     Register routes to Express server under given prefix
     ###
 
@@ -107,5 +107,6 @@ exports.loadExtensions = (config) ->
     extension.location = path.resolve config.projectRoot, extension.location
 
     ext = require "#{extension.location}/main"
-    loaded[extension.name] = new ext.extension _.defaults extension.configuration, config.extensionDefaults
+    config = _.defaults extension.configuration, config.extensionDefaults
+    loaded[extension.name] = new ext.extension config
   loaded

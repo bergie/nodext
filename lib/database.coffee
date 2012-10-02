@@ -1,7 +1,8 @@
 ###
 # NodeXT database handling
 
-This is an optional module of NodeXT that sets up a [JugglingDB](https://github.com/1602/jugglingdb)
+This is an optional module of NodeXT that sets up a
+[JugglingDB](https://github.com/1602/jugglingdb)
 database connection based on the given configuration.
 ###
 {Schema} = require 'jugglingdb'

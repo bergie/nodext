@@ -46,7 +46,9 @@ exports.getConfig = (configFile) ->
   cfg.projectRoot ?= exports.getProjectRoot configFile
 
   # Heroku support, get server port from environment
-  cfg.server?.port = process.env.PORT if process.env.PORT
-  cfg.database?.configuration?.url = process.env.DATABASE_URL if process.env.DATABASE_URL
+  if process.env.PORT
+    cfg.server?.port = process.env.PORT
+  if process.env.DATABASE_URL
+    cfg.database?.configuration?.url = process.env.DATABASE_URL
 
   cfg

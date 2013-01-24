@@ -6,7 +6,6 @@ used by NodeXT and registers the middleware and routes from all
 enabled extensions for it.
 ###
 http = require 'express'
-require 'express-configure'
 path = require 'path'
 
 exports.createApplication = (config) ->
@@ -39,20 +38,10 @@ exports.createApplication = (config) ->
   schema = database.getSchema config
   models = database.getModels schema, config
 
-  if config.server.privateKey and config.server.certificate
-    key = path.resolve config.projectRoot, config.server.privateKey
-    cert = path.resolve config.projectRoot, config.server.certificate
-    config.server.privateKey = key
-    config.server.certificate = cert
-    fs = require 'fs'
-    serverOptions =
-      key: fs.readFileSync config.server.privateKey
-      cert: fs.readFileSync config.server.certificate
-    server = http.createServer serverOptions
-  else
-    server = http.createServer()
+  server = http()
 
-  server.configure (done) ->
+  server.configure ->
+    done = ->
     pending = 0
     for name, extension of extensions
       extension.configure server, models

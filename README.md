@@ -1,6 +1,8 @@
 NodeXT - Plugin-driven Node.js applications
 ===========================================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bergie/nodext.svg)](https://greenkeeper.io/)
+
 NodeXT is a way to organize your Node.js web application so that it is driven by a collection of extensions. This makes the application easier to manage, as distinct collections of functionality can be isolated in their own extensions that can be enabled and disabled as needed.
 
 Each extension runs within a URL prefix provided by configuration.
